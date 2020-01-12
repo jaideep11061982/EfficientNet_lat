@@ -7,6 +7,9 @@ The way it works is Every block of Effnet starts from some depth say 16 after se
 One Limitation this has got is  .This can work with image size multiple that is multiple of 64 or 128  any one of them.Use below script to check for the sizes . Upsample of uplayers should match with max pool of layers down
 #Script
 To validate he sizes
+
+
+
 base_model = myEfficientNet.from_pretrained('efficientnet-b2') 
 x=torch.randn(1,3,320,1280)
 #x_center = x[:, :, :, 1536 // 12: -1536 // 12]
@@ -24,7 +27,7 @@ for b in base_model._blocks:
         size1=tmp.size(1)
         print(tmp.size(),nn.MaxPool2d(2)(x).size())
         
-#x = base_model._swish(base_model._bn1(base_model._conv_head(x)))  
+
 feats= base_model._swish(base_model._bn1(base_model._conv_head(x)))  
 device='cpu'
 print(feats.size())
